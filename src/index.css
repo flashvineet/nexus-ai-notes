@@ -8,33 +8,55 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 250 100% 99%;
+    --foreground: 231 84% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 231 84% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 231 84% 8%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 231 98% 65%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 231 20% 96%;
+    --secondary-foreground: 231 60% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 231 20% 96%;
+    --muted-foreground: 231 16% 50%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 260 100% 96%;
+    --accent-foreground: 260 90% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 231 20% 91%;
+    --input: 231 20% 94%;
+    --ring: 231 98% 65%;
+
+    /* AI Theme Colors */
+    --ai-primary: 270 95% 75%;
+    --ai-secondary: 260 90% 85%;
+    --ai-accent: 250 100% 88%;
+    
+    /* Knowledge Hub Specific */
+    --knowledge-bg: 231 15% 98%;
+    --knowledge-card: 0 0% 100%;
+    --knowledge-border: 231 15% 88%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(231 98% 65%), hsl(270 95% 75%));
+    --gradient-ai: linear-gradient(135deg, hsl(270 95% 75%), hsl(260 90% 85%));
+    --gradient-subtle: linear-gradient(180deg, hsl(250 100% 99%), hsl(231 20% 96%));
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(231 98% 65% / 0.15);
+    --shadow-ai: 0 8px 30px -8px hsl(270 95% 75% / 0.25);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.5rem;
 
