@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { authAPI } from '@/api/api';
 import { toast } from '@/hooks/use-toast';
 
 interface User {
@@ -53,33 +54,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      // TODO: Replace with actual API call to your backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('user', JSON.stringify(data.user));
-        setUser(data.user);
-        toast({ title: 'Success', description: 'Logged in successfully!' });
-        return true;
-      } else {
-        const error = await response.json();
-        toast({ 
-          title: 'Login Failed', 
-          description: error.message || 'Invalid credentials',
-          variant: 'destructive' 
-        });
-        return false;
-      }
+      const data = await authAPI.login(email, password);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      setUser(data.user);
+      toast({ title: 'Success', description: 'Logged in successfully!' });
+      return true;
     } catch (error) {
+      console.error('Login error:', error);
       toast({ 
         title: 'Login Failed', 
-        description: 'Network error. Please try again.',
+        description: error instanceof Error ? error.message : 'Network error. Please try again.',
         variant: 'destructive' 
       });
       return false;
@@ -88,29 +73,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const register = async (email: string, password: string): Promise<boolean> => {
     try {
-      // TODO: Replace with actual API call to your backend
-      const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5000'}/api/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (response.ok) {
-        toast({ title: 'Success', description: 'Account created successfully! Please log in.' });
-        return true;
-      } else {
-        const error = await response.json();
-        toast({ 
-          title: 'Registration Failed', 
-          description: error.message || 'Unable to create account',
-          variant: 'destructive' 
-        });
-        return false;
-      }
+      await authAPI.register(email, password);
+      toast({ title: 'Success', description: 'Account created successfully! Please log in.' });
+      return true;
     } catch (error) {
+      console.error('Registration error:', error);
       toast({ 
         title: 'Registration Failed', 
-        description: 'Network error. Please try again.',
+        description: error instanceof Error ? error.message : 'Network error. Please try again.',
         variant: 'destructive' 
       });
       return false;
